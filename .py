@@ -1,93 +1,86 @@
 import turtle
 import random
-from turtle import Screen
+import time
 
+# -------------------- Setup Screen --------------------
+screen = turtle.Screen()
+screen.bgcolor("black")
+screen.title("🐢 TURBO TURTLE SHOWDOWN 🏁")
+screen.setup(width=800, height=600)
+
+# -------------------- Colors --------------------
 vibrant_colors = [
     "red", "orange", "orangered", "gold", "yellow",
-    "lime", "limegreen", "springgreen", "cyan", "deepskyblue",
-    "blue", "dodgerblue", "magenta", "fuchsia", "hotpink",
-    "mediumvioletred", "violet", "purple", "turquoise", "chartreuse"
+    "lime", "springgreen", "cyan", "deepskyblue", "dodgerblue",
+    "blue", "magenta", "fuchsia", "hotpink", "violet",
+    "mediumvioletred", "purple", "turquoise", "chartreuse"
 ]
 
-Random_angles = [90,180,270]
+# -------------------- Draw Track --------------------
 
-tutle1 = turtle.Turtle()
-tutle1.speed(1)
-tutle1.shape("turtle")
-tutle1.color("green")
-tutle1.penup()
-tutle1.goto(-250,100)
-tutle1.pendown()
+Track = turtle.Turtle()
+Track.color("white")
+Track.penup()
+Track.speed(5)
+Track.goto(200,200)
+Track.left(270)
+Track.pendown()
+Track.forward(400)
 
-tutle2 = turtle.Turtle()
-tutle2.speed(1)
-tutle2.shape("turtle")
-tutle2.color("red")
-tutle2.penup()
-tutle2.goto(-250,50)
-tutle2.pendown()
+def Lines():
+    Track.penup()
+    Track.forward(40)
+    Track.pendown()
+    Track.forward(40)
 
-tutle3 = turtle.Turtle()
-tutle3.speed(1)
-tutle3.shape("turtle")
-tutle3.color("orange")
-tutle3.penup()
-tutle3.goto(-250,0)
-tutle3.pendown()
+def TrackLines():
+    X_Cod = 200
+    Y_cord = 150
+    for I in range(5):
+        Track.speed(20)
+        Track.penup()
+        Track.goto(X_Cod,Y_cord)
+        Track.setheading(180)
+        for I in range (5):
+            Lines()
 
-tutle4 = turtle.Turtle()
-tutle4.speed(1)
-tutle4.shape("turtle")
-tutle4.color("blue")
-tutle4.penup()
-tutle4.goto(-250,-50)
-tutle4.pendown()
-
-tutle5 = turtle.Turtle()
-tutle5.speed(1)
-tutle5.shape("turtle")
-tutle5.color("lime")
-tutle5.penup()
-tutle5.goto(-250,-100)
-tutle5.pendown()
-
-def RandomSpeed():
-    return random.randint(1,100)
-
-
-def Moveforward():
-
-    speed = random.randint(1,25)
-    tutle1.forward(speed)
-    speed = random.randint(1, 25)
-    tutle2.forward(speed)
-    speed = random.randint(1, 25)
-    tutle3.forward(speed)
-    speed = random.randint(1, 25)
-    tutle4.forward(speed)
-    speed = random.randint(1, 25)
-    tutle5.forward(speed)
-
-
-for I in range (30):
-    Moveforward()
-    X_coordinate = tutle1.xcor()
-    X_coordinate2 = tutle2.xcor()
-    X_coordinate3 = tutle3.xcor()
-    X_coordinate4 = tutle4.xcor()
-    X_coordinate5 = tutle5.xcor()
-
-
-    if X_coordinate > 100 or X_coordinate2 > 100 or X_coordinate3 > 100 or X_coordinate4 > 100 or X_coordinate5 > 100 :
-        print(f"Race over")
-        break
+        Y_cord = Y_cord - 75
+turtles = []
+def CreatingTurtles():
+    y_cord = 180
+    x_cord = -200
+    for I in range(6):
+        t = turtle.Turtle()
+        t.shape("turtle")
+        t.color("white")
+        t.speed(random.randint(0,100))
+        t.penup()
+        t.goto(x_cord,y_cord)
+        t.pendown()
+        y_cord = y_cord - 75
+        turtles.append(t)
 
 
 
-My_screen = Screen()
-My_screen.listen()
+TrackLines()
+Track.hideturtle()
+CreatingTurtles()
+
+finish_line = 200
+positions = []
+
+while len(positions) < 5:
+    for t in turtles:
+        if t not in positions:
+            t.forward(random.randint(1, 15))
+            # Change trail color
+            #t.pencolor(random.choice(vibrant_colors))
+            if t.xcor() > finish_line:
+                positions.append(t)
+                t.speed(0)
+                break
 
 
 
 
-Screen().exitonclick()
+screen.exitonclick()
