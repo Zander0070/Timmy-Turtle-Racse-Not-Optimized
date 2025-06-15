@@ -79,7 +79,7 @@ for I in range (30):
 
 
     if X_coordinate > 100 or X_coordinate2 > 100 or X_coordinate3 > 100 or X_coordinate4 > 100 or X_coordinate5 > 100 :
-        print(f"You won")
+        print(f"Race over")
         break
 
 
